@@ -7,6 +7,8 @@
 
 [01 - Fork and clone this repo](labs/01-Fork_and_clone_this_repo/README.md)
 
+[02 - Install prerequisites](labs/02-Install_prerequisites/README.md)
+
 [03 - Docker installation](labs/03-Docker_installation/README.md)
 
 [04 - Docker images and containers](labs/04-Docker_images_and_containers/README.md)
