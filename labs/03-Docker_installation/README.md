@@ -154,3 +154,30 @@ Install Docker Desktop by following the instructions [here](https://www.docker.c
 Be aware: a DockerHub username must be created
 
 ## Using Podman instead
+
+To experiment with containers, other than Docker it's possible to use Podman which is a daemonless, open source, Linux native tool, designed to make it easy to find, run, build, share and deploy applications using Open Containers Initiative (OCI).
+
+Podman can be downloaded from the official [website](https://podman.io).
+
+Mac users can use Podman on a LimaVM machine. Provided that LimaVM is already installed on your Mac, use this command sequence to get up and running:
+
+Start Lima VM from template
+
+```console
+$ limactl start ./lima/podman-vm.yaml
+...
+```
+
+To run `podman` on the host (assumes podman-remote is installed), run the following commands:
+
+```console
+$ lpodman system connection add lima-podman-vm "unix:///user/home/.lima/podman-vm/sock/podman.sock"
+$ podman system connection default lima-podman-vm
+$ podman run quay.io/podman/hello
+```
+
+To use docker command against podman, create an alias:
+
+```console
+$ alias "docker=podman"
+```
