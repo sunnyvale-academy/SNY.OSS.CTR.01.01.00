@@ -33,6 +33,7 @@ We can also run the Java class using the same image, but with a different contai
 $ docker run \
     --rm \
     -v $(pwd)/app:/app/ \
+    --platform linux/amd64 \
     openjdk:7 java -cp / app.Main
 Hello from a Java app!
 ```
@@ -50,6 +51,7 @@ To make the bind mount read-only,
 ```console
 $ docker run \
     --rm \
+    --platform linux/amd64 \
     --mount type=bind,source=$(pwd)/app,target=/app/,readonly \
     openjdk:7 java -cp / app.Main
 Hello from a Java app!
