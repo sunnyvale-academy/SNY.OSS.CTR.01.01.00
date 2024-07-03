@@ -47,18 +47,18 @@ web_1    |  * Debug mode: off
 web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
-Test the application by pointing your browser at http://\<DOCKER HOST\>:5000, you should see the message **Hello World! I have been seen 1 times.**
+Test the application by pointing your browser at http://\<DOCKER HOST\>:6000, you should see the message **Hello World! I have been seen 1 times.**
 
 or using cURL:
 
 ```console
-$ curl -vvv http://<DOCKER HOST>:5000
+$ curl -vvv http://<DOCKER HOST>:6000
 
-* Rebuilt URL to: http://localhost:5000/
+* Rebuilt URL to: http://localhost:6000/
 *   Trying 127.0.0.1...
-* Connected to localhost (127.0.0.1) port 5000 (#0)
+* Connected to localhost (127.0.0.1) port 6000 (#0)
 > GET / HTTP/1.1
-> Host: localhost:5000
+> Host: localhost:6000
 > User-Agent: curl/7.45.0
 > Accept: */*
 >
