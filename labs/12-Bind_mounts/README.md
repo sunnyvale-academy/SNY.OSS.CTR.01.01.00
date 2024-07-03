@@ -14,6 +14,7 @@ Note the `-v` flag used to mount a host's directory with the source code into th
 $ docker run \
     --rm \
     -v $(pwd)/app:/app/ \
+    --platform linux/amd64 \
     openjdk:7 javac -cp /app /app/Main.java
 ```
 
