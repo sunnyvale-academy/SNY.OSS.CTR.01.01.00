@@ -1,0 +1,19 @@
+# Use an official Python base image
+FROM python:3.11-slim
+
+ENV RABBITMQ_USERNAME=guest
+ENV RABBITMQ_PASSWORD=guest
+ENV RABBITMQ_HOST=rabbitmq
+ENV RABBITMQ_PORT=5672
+
+# Set work directory
+WORKDIR /app
+
+# Install dependencies
+RUN pip install --no-cache-dir pika
+
+# Copy sender script
+COPY app/sender.py .
+
+# Set default command (can be overridden)
+CMD ["python", "sender.py"]

@@ -1,0 +1,15 @@
+# podman build -t dennydgl1/rabbitmq-sender:latest -f Dockerfile.sender .
+FROM python:3.11-slim
+
+ENV RABBITMQ_USERNAME=guest
+ENV RABBITMQ_PASSWORD=guest
+ENV RABBITMQ_HOST=rabbitmq
+ENV RABBITMQ_PORT=5672
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir pika
+
+COPY app/receiver.py .
+
+CMD ["python", "receiver.py"]

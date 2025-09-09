@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     matchLabels:
@@ -23,6 +25,12 @@ spec:
           name: nginx-conf
         - mountPath: /var/log/nginx
           name: log
+        env:
+        - name: DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: nginx-conf
+              key: database
       volumes:
       - name: nginx-conf
         configMap:

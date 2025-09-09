@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: receiver-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: receiver-app
+  template:
+    metadata:
+      labels:
+        app: receiver-app
+    spec:
+      initContainers:
+        - name: init-wait-for-rabbitmq
+          image: busybox
+          command: ['sh', '-c', 'until nc -z rabbitmq 5672; do echo "waiting for rabbitmq"; sleep 2; done;']
+      containers:
+      - name: receiver-app
+        image: dennydgl1/rabbitmq-receiver:1.0
+        imagePullPolicy: Always
+        env:
+          - name: RABBITMQ_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: receiver-secret
+                key: username
+          - name: RABBITMQ_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: receiver-secret
+                key: password

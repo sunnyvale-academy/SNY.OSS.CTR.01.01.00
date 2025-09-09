@@ -9,7 +9,7 @@ data:
   # Or set as complete file contents (even JSON!)
   nginx.conf: |
     user nginx;
-    worker_processes  3;
+    worker_processes 2;
     error_log  /var/log/nginx/error.log;
     events {
       worker_connections  10240;

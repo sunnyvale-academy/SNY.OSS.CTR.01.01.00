@@ -1,0 +1,46 @@
+# helm install keda kedacore/keda --namespace keda --create-namespace
+# help repo update
+# kubectl apply -f keda.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keda-rabbitmq-secret
+data:
+  host: YW1xcDovL3JhYmJpdG1xLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWw6NTY3Mgo= # base64 encoded value of format amqp://localhost:5672/vhost (no username/password)
+  username: cmFiaWJ0bXEy
+  password: c2VjdXJlUGFzc3dvcmQ=
+---
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: keda-trigger-auth-rabbitmq-conn
+  namespace: default
+spec:
+  secretTargetRef:
+    - parameter: host
+      name: keda-rabbitmq-secret
+      key: host
+    - parameter: username
+      name: keda-rabbitmq-secret
+      key: username
+    - parameter: password
+      name: keda-rabbitmq-secret
+      key: password 
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: rabbitmq-scaledobject
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: receiver-app
+  triggers:
+  - type: rabbitmq
+    metadata:
+      protocol: amqp
+      queueName: test_queue
+      mode: QueueLength
+      value: "100000"
+    authenticationRef:
+      name: keda-trigger-auth-rabbitmq-conn
